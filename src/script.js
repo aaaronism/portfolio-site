@@ -160,6 +160,30 @@ mesh5.position.y = .48
 scene.add(mesh5)
 })
 
+// Particles
+// Geometry
+const particlesCount = 1000
+const positions = new Float32Array(particlesCount * 3)
+
+for(let i = 0; i < particlesCount; i++) {
+    positions[i * 3 + 0] = (Math.random() - 0.5) * 50
+    positions[i * 3 + 1] = objectsDistance * 0.5 - Math.random() * objectsDistance * sectionMeshes.length
+    positions[i * 3 + 2] = (Math.random() - 0.2) * 100
+}
+
+const particlesGeometry = new THREE.BufferGeometry()
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+// Material
+const particlesMaterial = new THREE.PointsMaterial({
+    color: parameters.materialColor,
+    sizeAttenuation: true,
+    size: 0.05
+})
+
+// Points
+const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+scene.add(particles)
 
 // Lights
 const directionalLight = new THREE.DirectionalLight('#ffffff', 1.3)
