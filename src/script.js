@@ -17,6 +17,27 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+const manager = new THREE.LoadingManager()
+manager.onStart = function(url, itemsLoaded, itemsTotal) {
+    console.log('hi')
+}
+manager.onLoad = function () {
+    console.log('a')
+}
+
+manager.onProgress = function (url, itemsLoaded, itemsTotal) {
+    console.log('b')
+}
+
+manager.onError = function (url) {
+    console.log('error')
+}
+
+const loader5 = new THREE.ObjectLoader(manager)
+loader5.load('', function(object) {
+    console.log('d')
+})
+
 // Models
 const gltfLoader = new GLTFLoader()
 
