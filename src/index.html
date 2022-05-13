@@ -8,8 +8,14 @@
 </head>
 <body>
     <canvas class="webgl"></canvas>
+    <section id="loading-screen">
+        <div id="loader"></div>
+        <div id="loadtext">
+            <h1>LOADING...</h1>
+        </div>
+    </section>
     <div id="scrolldiv">
-        <h2 id="scrolltext">- Scroll Down to Continue -</h2>
+        <h2 id="scrolltext">- scroll down to continue -</h2>
         </div>
         <div id="but">
         <div id="libut">
@@ -30,14 +36,32 @@
         </section>
         <section id="about" class="section">
             <div id="aboutme">
-                <p>Former Suburbanite turned City Boy, Aaron is a creative-minded software developer and dreamer who enjoys aesthetics, fantasy, and thinking outside the box. With 3 years of Marketing experience in roles that require helping the community, being empathetic and working well in teams has become second-nature.</p>
+                <div id="aboutme2">
+                <p>Former Suburbanite turned City Boy</p>
+                <p>With 3+ years of digital marketing experience in roles helping the community</p>
+                <p>A dreamer, creative-minded software engineer, child-at-heart who enjoys anything fantasy-related and thinking outside the box</p>
+                <p>In my free time
+                <br>you can catch me with a camera enjoying the visuals of the world
+                <br>or diving into open world games enjoying the visuals of the virtual world</p>
+            </div>
             </div>
         </section>
         <section id="projects" class="section">
+            <h2 id="projectitle">what i've been working on...</h2>
             <div id="projectbox">
-                <p>Portfolio Website</p>
-                <p>Wordle Clone</p>
-                <p>Task Manager</p>
+                <div id="projectbox2">
+                <h3><a href="https://github.com/aaaronism/portfolio-site" target="_blank">Portfolio Website</a></h3>
+                <p>Outside bootcamp, I was really interested in working with an immersive interface so I started learning Three.js. A total beginner who can't get enough, I knew I had to implement this into my portfolio website. Keep up with this website to watch me incorporate new and amazing things I learn.</p>
+                <h4>HTML, CSS, Javascript, Three.js</h4>
+                <br>
+                <h3><a href="https://github.com/aaaronism/task-manager-camp-halfblood" target="_blank">Task Manager</a></h3>
+                <p>given the prompt of creating a full-stack application that uses all crud operations, I decided to create a task manager in the image of my favorite book series, The Adventures of Percy Jackson. Using a MEN stack, this task manager with a fantasy twist turned into a quest manager...Time for some adventure!</p>
+                <h4>HTML, CSS, Javascript, Express.js, EJS, Mongo, MongoDB</h4>
+                <br>
+                <h3><a href="https://github.com/aaaronism/wordle-clone" target="_blank">Wordle Clone</a></h3>
+                <p>my first ever project where I was given the prompt of creating a simple front-end game application, I decided to model mine after a trending favorite, Wordle! seemingly simple on the surface, only having recently learned the holy trinity of html, css, and javascript, I quickly realized the work I had ahead of me.</p>
+                <h4>HTML, CSS, Javascript</h4>
+                </div>
             </div>
         </section>
         </div>
