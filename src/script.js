@@ -111,6 +111,7 @@ let mixer15 = null
 let mixer16 = null
 let mixer17 = null
 let mixer18 = null
+let mixer80 = null
 
 const firstG = gltfLoader.load(
     '/models/yard_grass/scene.gltf',
@@ -204,6 +205,30 @@ const sixthG = gltfLoader.load(
         scene.add(gltf.scene)
     }
 )
+
+// for (let i = 0; i < 10; i++) {
+// const sevG = gltfLoader.load(
+//     '/models/yard_grass/scene.gltf',
+//     (gltf) => {
+//         mixer80 = new THREE.AnimationMixer(gltf.scene)
+//         const action = mixer80.clipAction(gltf.animations[0])
+
+//         action.play()
+
+//         gltf.scene.scale.set(0.2, 0.2, 0.2)
+//         sevG.position.x = 16
+//         sevG.position.y = 0.5
+//         sevG.position.z = -3
+//         sevG.position.x = 14
+//         sevG.position.y = 0.5
+//         sevG.position.z = -3
+//         scene.add(gltf.scene)
+//     }
+// )
+// }
+
+
+
 
 const city = gltfLoader.load(
     '/models/city/scene.gltf',
@@ -597,14 +622,14 @@ scene.add(particles)
 const directionalLight = new THREE.DirectionalLight('#ffffff', 1.3)
 directionalLight.position.set(1, 1, 0.1)
 
-const sunLight = new THREE.PointLight(0xfeca9f, 1, -10)
-sunLight.position.set(-1, 8, -10)
+// const sunLight = new THREE.PointLight(0xfeca9f, 1, -10)
+// sunLight.position.set(-1, 8, -10)
 
-const otherLight = new THREE.PointLight(0xff0000, .5, -10)
-otherLight.position.set(8000, -1, 1)
+// const otherLight = new THREE.PointLight(0xff0000, .5, -10)
+// otherLight.position.set(8000, -1, 1)
 
 scene.add(directionalLight)
-scene.add(sunLight)
+// scene.add(sunLight)
 
 
 // Sizes
@@ -624,22 +649,22 @@ function resizing() {
         document.getElementById('projectbox').style.zoom = ".75"
     } else if (sizes.width <= 900 && sizes.width > 800) {
         camera.fov = 55
-        document.getElementById('aboutme').style.zoom = ".65"
-        document.getElementById('projectbox').style.zoom = ".75"
+        document.getElementById('aboutme').style.zoom = ".70"
+        document.getElementById('projectbox').style.zoom = ".70"
     } else if (sizes.width <= 800 && sizes.width > 700) {
         camera.fov = 60
-        document.getElementById('aboutme').style.zoom = ".55"
-        document.getElementById('projectbox').style.zoom = ".75"
+        document.getElementById('aboutme').style.zoom = ".60"
+        document.getElementById('projectbox').style.zoom = ".60"
         camera.position.y = 0
     } else if (sizes.width <= 700 && sizes.width > 600) {
         camera.fov = 70
-        document.getElementById('aboutme').style.zoom = ".45"
-        document.getElementById('projectbox').style.zoom = ".75"
+        document.getElementById('aboutme').style.zoom = ".50"
+        document.getElementById('projectbox').style.zoom = ".50"
         camera.position.y = .5
     } else if (sizes.width < 600) {
         camera.fov = 80
-        document.getElementById('aboutme').style.zoom = ".35"
-        document.getElementById('projectbox').style.zoom = ".75"
+        document.getElementById('aboutme').style.zoom = ".40"
+        document.getElementById('projectbox').style.zoom = ".40"
     } else {
         camera.fov = 40
     }
@@ -692,21 +717,27 @@ let theDegree = 35
 if (sizes.width <= 1100 && sizes.width > 1000) {
     theDegree = 45
     document.getElementById('aboutme').style.zoom = ".85"
+    document.getElementById('projectbox').style.zoom = ".85"
 } else if (sizes.width <= 1000 && sizes.width > 900) {
     theDegree = 50
     document.getElementById('aboutme').style.zoom = ".75"
+    document.getElementById('projectbox').style.zoom = ".75"
 } else if (sizes.width <= 900 && sizes.width > 800) {
     theDegree = 55
-    document.getElementById('aboutme').style.zoom = ".65"
+    document.getElementById('aboutme').style.zoom = ".70"
+    document.getElementById('projectbox').style.zoom = ".70"
 } else if (sizes.width <= 800 && sizes.width > 700) {
     theDegree = 60
-    document.getElementById('aboutme').style.zoom = ".55"
+    document.getElementById('aboutme').style.zoom = ".60"
+    document.getElementById('projectbox').style.zoom = ".60"
 } else if (sizes.width <= 700 && sizes.width > 600) {
     theDegree = 70
-    document.getElementById('aboutme').style.zoom = ".45"
+    document.getElementById('aboutme').style.zoom = ".50"
+    document.getElementById('projectbox').style.zoom = ".50"
 } else if (sizes.width < 600) {
     theDegree = 80
-    document.getElementById('aboutme').style.zoom = ".35"
+    document.getElementById('aboutme').style.zoom = ".40"
+    document.getElementById('projectbox').style.zoom = ".40"
 } else {
     theDegree = 40
 }
