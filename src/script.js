@@ -1,11 +1,12 @@
 import './style.css'
 import * as THREE from 'three'
 import * as dat from 'lil-gui'
-import gsap from 'gsap'
+import {gsap} from 'gsap'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
-import { Light } from 'three'
+import { Light, Vector4 } from 'three'
+import { mapLinear } from 'three/src/math/MathUtils'
 
 const parameters = {
     materialColor: '#ffeded'
@@ -17,28 +18,71 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// Overlay
+const overlayGeometry = new THREE.PlaneGeometry(2, 2, 1, 1)
+const overlayMaterial = new THREE.ShaderMaterial({
+    // wireframe: true,
+    transparent: true,
+    uniforms:
+    {
+        uAlpha: {value: 1}
+    },
+    vertexShader: `
+        void main()
+        {
+            gl_Position = vec4(position, 1.0);
+        }
+    `,
+    fragmentShader: `
+        uniform float uAlpha;
+
+        void main()
+        {
+            gl_FragColor = vec4(0.0, 0.0, 0.0, uAlpha);
+        }
+    `
+})
+const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
+scene.add(overlay)
+
 // Loader
-const manager = new THREE.LoadingManager()
+const manager = new THREE.LoadingManager(
+    () => 
+    {
+        window.setTimeout(() => 
+        {
+        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 6, value: 0, delay: 1 })
+        const loadingScreen = document.getElementById('loading-screen')
+        loadingScreen.classList.add('fade-out')
+        // loadingScreen.style.transform = ''
+    }, 500)
+},
+    (itemUrl, itemsLoaded, itemsTotal) => {
+        console.log(itemUrl, itemsLoaded, itemsTotal)
+    }
+)
+const gltfLoader2 = new GLTFLoader(manager)
+const cubeTextureLoader = new THREE.CubeTextureLoader(manager)
 
-const loadingScreen = document.getElementById('loading-screen')
+// const loadingScreen = document.getElementById('loading-screen')
 
-// manager.onStart = function(url, itemsLoaded, itemsTotal) {
-//     console.log('hi')
+// // manager.onStart = function(url, itemsLoaded, itemsTotal) {
+// //     console.log('hi')
+// // }
+
+// manager.onLoad = function () {
+
+//     loadingScreen.classList.add('fade-out')
+//     loadingScreen.style.zIndex = "0"
 // }
 
-manager.onLoad = function () {
-
-    loadingScreen.classList.add('fade-out')
-    loadingScreen.style.zIndex = "0"
-}
-
-manager.onProgress = function (url, itemsLoaded, itemsTotal) {
-    loadingScreen
-}
-
-// manager.onError = function (url) {
-//     console.log('error')
+// manager.onProgress = function (url, itemsLoaded, itemsTotal) {
+//     loadingScreen
 // }
+
+// // manager.onError = function (url) {
+// //     console.log('error')
+// // }
 
 const loader5 = new THREE.ObjectLoader(manager)
 loader5.load('', function(object) {
@@ -65,6 +109,7 @@ let mixer14 = null
 let mixer15 = null
 let mixer16 = null
 let mixer17 = null
+let mixer18 = null
 
 const firstG = gltfLoader.load(
     '/models/yard_grass/scene.gltf',
@@ -188,18 +233,18 @@ const cloud1 = gltfLoader.load(
     }
 )
 
-const cloud2 = gltfLoader.load(
-    '/models/cloud_test/scene.gltf',
-    (gltf) => {
-        mixer9 = new THREE.AnimationMixer(gltf.scene)
+// const cloud2 = gltfLoader.load(
+//     '/models/cloud_test/scene.gltf',
+//     (gltf) => {
+//         mixer9 = new THREE.AnimationMixer(gltf.scene)
 
-        gltf.scene.scale.set(1, 1, 3)
-        gltf.scene.position.x = 35
-        gltf.scene.position.y = -4
-        gltf.scene.position.z = -2
-        scene.add(gltf.scene)
-    }
-)
+//         gltf.scene.scale.set(1, 1, 3)
+//         gltf.scene.position.x = 35
+//         gltf.scene.position.y = -4
+//         gltf.scene.position.z = -2
+//         scene.add(gltf.scene)
+//     }
+// )
 
 const cloud3 = gltfLoader.load(
     '/models/cloud_test/scene.gltf',
@@ -214,18 +259,18 @@ const cloud3 = gltfLoader.load(
     }
 )
 
-const cloud4 = gltfLoader.load(
-    '/models/cloud_test/scene.gltf',
-    (gltf) => {
-        mixer11 = new THREE.AnimationMixer(gltf.scene)
+// const cloud4 = gltfLoader.load(
+//     '/models/cloud_test/scene.gltf',
+//     (gltf) => {
+//         mixer11 = new THREE.AnimationMixer(gltf.scene)
 
-        gltf.scene.scale.set(1, 1, 2)
-        gltf.scene.position.x = 31
-        gltf.scene.position.y = -4
-        gltf.scene.position.z = -5
-        scene.add(gltf.scene)
-    }
-)
+//         gltf.scene.scale.set(1, 1, 2)
+//         gltf.scene.position.x = 31
+//         gltf.scene.position.y = -4
+//         gltf.scene.position.z = -5
+//         scene.add(gltf.scene)
+//     }
+// )
 
 const cloud5 = gltfLoader.load(
     '/models/cloud_test/scene.gltf',
@@ -240,18 +285,18 @@ const cloud5 = gltfLoader.load(
     }
 )
 
-const cloud6 = gltfLoader.load(
-    '/models/cloud_test/scene.gltf',
-    (gltf) => {
-        mixer13 = new THREE.AnimationMixer(gltf.scene)
+// const cloud6 = gltfLoader.load(
+//     '/models/cloud_test/scene.gltf',
+//     (gltf) => {
+//         mixer13 = new THREE.AnimationMixer(gltf.scene)
 
-        gltf.scene.scale.set(1, 1, 2)
-        gltf.scene.position.x = 36
-        gltf.scene.position.y = -1
-        gltf.scene.position.z = -13
-        scene.add(gltf.scene)
-    }
-)
+//         gltf.scene.scale.set(1, 1, 2)
+//         gltf.scene.position.x = 36
+//         gltf.scene.position.y = -1
+//         gltf.scene.position.z = -13
+//         scene.add(gltf.scene)
+//     }
+// )
 
 const cloud7 = gltfLoader.load(
     '/models/cloud_test/scene.gltf',
@@ -266,18 +311,18 @@ const cloud7 = gltfLoader.load(
     }
 )
 
-const cloud8 = gltfLoader.load(
-    '/models/cloud_test/scene.gltf',
-    (gltf) => {
-        mixer15 = new THREE.AnimationMixer(gltf.scene)
+// const cloud8 = gltfLoader.load(
+//     '/models/cloud_test/scene.gltf',
+//     (gltf) => {
+//         mixer15 = new THREE.AnimationMixer(gltf.scene)
 
-        gltf.scene.scale.set(2, 2, 5)
-        gltf.scene.position.x = 39
-        gltf.scene.position.y = 1
-        gltf.scene.position.z = -18
-        scene.add(gltf.scene)
-    }
-)
+//         gltf.scene.scale.set(2, 2, 5)
+//         gltf.scene.position.x = 39
+//         gltf.scene.position.y = 1
+//         gltf.scene.position.z = -18
+//         scene.add(gltf.scene)
+//     }
+// )
 
 const cloud9 = gltfLoader.load(
     '/models/cloud_test/scene.gltf',
@@ -292,18 +337,35 @@ const cloud9 = gltfLoader.load(
     }
 )
 
-const cloud10 = gltfLoader.load(
-    '/models/cloud_test/scene.gltf',
-    (gltf) => {
-        mixer17 = new THREE.AnimationMixer(gltf.scene)
+// const cloud10 = gltfLoader.load(
+//     '/models/cloud_test/scene.gltf',
+//     (gltf) => {
+//         mixer17 = new THREE.AnimationMixer(gltf.scene)
 
-        gltf.scene.scale.set(.5, .5, .5)
-        gltf.scene.position.x = 41
-        gltf.scene.position.y = -4
-        gltf.scene.position.z = -9
-        scene.add(gltf.scene)
-    }
-)
+//         gltf.scene.scale.set(.5, .5, .5)
+//         gltf.scene.position.x = 41
+//         gltf.scene.position.y = -4
+//         gltf.scene.position.z = -9
+//         scene.add(gltf.scene)
+//     }
+// )
+
+// const cloud11 = gltfLoader.load(
+//     '/models/cloud_test/scene.gltf',
+//     (gltf) => { for(let i = 0; i < 50; i++) {
+//         mixer18 = new THREE.AnimationMixer(gltf.scene)
+
+//         gltf.scene.scale.set(.5, .5, .5)
+//         gltf.scene.position.x = 48
+//         gltf.scene.position.y = -4
+//         gltf.scene.position.z = -9
+//         gltf.scene.position.x = 53
+//         gltf.scene.position.y = -4
+//         gltf.scene.position.z = -9
+//         scene.add(gltf.scene)
+//     }
+//     }
+// )
 
 
 // Objects
@@ -687,7 +749,7 @@ window.addEventListener('scroll', () => {
 })
 
 function showAbout() {
-    document.getElementById('aboutme').style.opacity = "1"
+    document.getElementById('aboutme').style.visibility = "visible"
     document.getElementById('aboutme').style.animation = "fadeIn 1s forwards"
 }
 
@@ -696,26 +758,30 @@ document.addEventListener("scroll", () => {
     let one = Math.round(scrollY / sizes.width)
     let two = scrollY / sizes.width
     if (two != .32 && two < .32) {
-        document.getElementById('aboutme').style.opacity = "0"
+        document.getElementById('aboutme').style.visibility = "hidden"
         document.getElementById('aboutme').style.animation = "none"
     } else if (two >= .32 && two < 0.82) {
-        showAbout()
+        document.getElementById('aboutme').style.visibility = "visible"
+        document.getElementById('aboutme').style.animation = "fadeIn 1s forwards"
     } else {
-        document.getElementById('aboutme').style.opacity = "0"
+        document.getElementById('aboutme').style.visibility = "hidden"
         document.getElementById('aboutme').style.animation = "fadeOut 1s forwards"
     // } else if (one < 1) {
     //     document.getElementById('aboutme').style.opacity = "0"
     //     document.getElementById('aboutme').style.animation = "fadeOut 1s forwards"
     }
     if (two != 0.91 && two < 0.91) {
-        document.getElementById('projectbox').style.opacity = "0"
+        // document.getElementById('projectbox').style.opacity = "0"
         document.getElementById('projectbox').style.animation = "none"
-        document.getElementById('projectitle').style.opacity = "0"
+        document.getElementById('projectbox').style.visibility = "hidden"
+        // document.getElementById('projectitle').style.opacity = "0"
         document.getElementById('projectitle').style.animation = "none"
+        document.getElementById('projectbox').style.visibility = "hidden"
     } else if (two >= 0.91 && two < 1.28) {
-        document.getElementById('projectbox').style.opacity = "1"
+        // document.getElementById('projectbox').style.opacity = "1"
+        document.getElementById('projectbox').style.visibility = "visible"
         document.getElementById('projectbox').style.animation = "fadeIn 1s forwards"
-        document.getElementById('projectitle').style.opacity = "1"
+        document.getElementById('projectitle').style.visibility = "visible"
         document.getElementById('projectitle').style.animation = "fadeIn 3s forwards"
     } else {
         document.getElementById('projectbox').style.opacity = "0"
