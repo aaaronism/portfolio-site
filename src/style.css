@@ -215,7 +215,8 @@ section:nth-child(odd)
     top: 14%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: none
+    animation: none;
+    opacity: 0;
 }
 
 #projectbox2 h3 {

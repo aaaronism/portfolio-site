@@ -655,7 +655,8 @@ cameraGroup.add(camera)
 // Renderer
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    alpha: true
+    alpha: true,
+    powerPreference: 'high-performance'
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
