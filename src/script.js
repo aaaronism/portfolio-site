@@ -639,32 +639,51 @@ const sizes = {
 }
 
 function resizing() {
-    if (sizes.width <= 1100 && sizes.width > 1000) {
-        camera.fov = 45
+    if (sizes.width <= 1100 && sizes.width > 1000 || sizes.height <= 750 && sizes.height > 695) {
+        // camera.fov = 45
         document.getElementById('aboutme').style.zoom = ".85"
         document.getElementById('projectbox').style.zoom = ".85"
-    } else if (sizes.width <= 1000 && sizes.width > 900) {
-        camera.fov = 50
+    } else if (sizes.width <= 1000 && sizes.width > 900 || sizes.height <= 695 && sizes.height > 645) {
+        // camera.fov = 50
         document.getElementById('aboutme').style.zoom = ".75"
         document.getElementById('projectbox').style.zoom = ".75"
-    } else if (sizes.width <= 900 && sizes.width > 800) {
-        camera.fov = 55
+    } else if (sizes.width <= 900 && sizes.width > 800 || sizes.height <= 645 && sizes.height > 630) {
+        // camera.fov = 55
         document.getElementById('aboutme').style.zoom = ".70"
         document.getElementById('projectbox').style.zoom = ".70"
-    } else if (sizes.width <= 800 && sizes.width > 700) {
-        camera.fov = 60
+    } else if (sizes.width <= 800 && sizes.width > 700 || sizes.height <= 630 && sizes.height > 615) {
+        // camera.fov = 60
         document.getElementById('aboutme').style.zoom = ".60"
         document.getElementById('projectbox').style.zoom = ".60"
+        // camera.position.y = 0
+    } else if (sizes.width <= 700 && sizes.width > 600 || sizes.height <= 615 && sizes.height > 605) {
+        // camera.fov = 70
+        document.getElementById('aboutme').style.zoom = ".50"
+        document.getElementById('projectbox').style.zoom = ".50"
+        // camera.position.y = .5
+    } else if (sizes.width < 600 || sizes.height < 605) {
+        // camera.fov = 80
+        document.getElementById('aboutme').style.zoom = ".40"
+        document.getElementById('projectbox').style.zoom = ".40"
+    } else {
+        // camera.fov = 40
+    }
+}
+function resizing2() {
+    if (sizes.width <= 1100 && sizes.width > 1000) {
+        camera.fov = 45
+      } else if (sizes.width <= 1000 && sizes.width > 900) {
+        camera.fov = 50
+    } else if (sizes.width <= 900 && sizes.width > 800) {
+        camera.fov = 55
+    } else if (sizes.width <= 800 && sizes.width > 700) {
+        camera.fov = 60
         camera.position.y = 0
     } else if (sizes.width <= 700 && sizes.width > 600) {
         camera.fov = 70
-        document.getElementById('aboutme').style.zoom = ".50"
-        document.getElementById('projectbox').style.zoom = ".50"
         camera.position.y = .5
     } else if (sizes.width < 600) {
         camera.fov = 80
-        document.getElementById('aboutme').style.zoom = ".40"
-        document.getElementById('projectbox').style.zoom = ".40"
     } else {
         camera.fov = 40
     }
@@ -696,6 +715,7 @@ window.addEventListener('resize', () =>
     //     camera.fov = 40
     // }
     resizing()
+    resizing2()
     // camera.fov = 57
     camera.updateProjectionMatrix()
 
@@ -714,30 +734,45 @@ scene.add(cameraGroup)
 sizes.width = window.innerWidth
 sizes.height = window.innerHeight
 let theDegree = 35
-if (sizes.width <= 1100 && sizes.width > 1000) {
-    theDegree = 45
+if (sizes.width <= 1100 && sizes.width > 1000 || sizes.height <= 750 && sizes.height > 695) {
+    // theDegree = 45
     document.getElementById('aboutme').style.zoom = ".85"
     document.getElementById('projectbox').style.zoom = ".85"
-} else if (sizes.width <= 1000 && sizes.width > 900) {
-    theDegree = 50
+} else if (sizes.width <= 1000 && sizes.width > 900 || sizes.height <= 695 && sizes.height > 645) {
+    // theDegree = 50
     document.getElementById('aboutme').style.zoom = ".75"
     document.getElementById('projectbox').style.zoom = ".75"
-} else if (sizes.width <= 900 && sizes.width > 800) {
-    theDegree = 55
+} else if (sizes.width <= 900 && sizes.width > 800 || sizes.height <= 645 && sizes.height > 630) {
+    // theDegree = 55
     document.getElementById('aboutme').style.zoom = ".70"
     document.getElementById('projectbox').style.zoom = ".70"
-} else if (sizes.width <= 800 && sizes.width > 700) {
-    theDegree = 60
+} else if (sizes.width <= 800 && sizes.width > 700 || sizes.height <= 630 && sizes.height > 615) {
+    // theDegree = 60
     document.getElementById('aboutme').style.zoom = ".60"
     document.getElementById('projectbox').style.zoom = ".60"
-} else if (sizes.width <= 700 && sizes.width > 600) {
-    theDegree = 70
+} else if (sizes.width <= 700 && sizes.width > 600 || sizes.height <= 615 && sizes.height > 605) {
+    // theDegree = 70
     document.getElementById('aboutme').style.zoom = ".50"
     document.getElementById('projectbox').style.zoom = ".50"
-} else if (sizes.width < 600) {
-    theDegree = 80
+} else if (sizes.width < 600 || sizes.height < 605) {
+    // theDegree = 80
     document.getElementById('aboutme').style.zoom = ".40"
     document.getElementById('projectbox').style.zoom = ".40"
+} else {
+    // theDegree = 40
+}
+if (sizes.width <= 1100 && sizes.width > 1000) {
+    theDegree = 45
+} else if (sizes.width <= 1000 && sizes.width > 900) {
+    theDegree = 50
+} else if (sizes.width <= 900 && sizes.width > 800) {
+    theDegree = 55
+} else if (sizes.width <= 800 && sizes.width > 700) {
+    theDegree = 60
+} else if (sizes.width <= 700 && sizes.width > 600) {
+    theDegree = 70
+} else if (sizes.width < 600) {
+    theDegree = 80
 } else {
     theDegree = 40
 }

@@ -88,7 +88,7 @@ html {
 
 #loadtext {
     position: fixed;
-    top: 68%;
+    bottom: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     animation: fadefade 3s infinite
