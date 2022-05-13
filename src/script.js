@@ -51,11 +51,12 @@ const manager = new THREE.LoadingManager(
     {
         window.setTimeout(() => 
         {
-        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 6, value: 0, delay: 1 })
+        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 5, value: 0, delay: 0.5 })
         const loadingScreen = document.getElementById('loading-screen')
         loadingScreen.classList.add('fade-out')
+        loadingScreen.style.zIndex = "0"
         // loadingScreen.style.transform = ''
-    }, 500)
+    }, 4000)
 },
     (itemUrl, itemsLoaded, itemsTotal) => {
         console.log(itemUrl, itemsLoaded, itemsTotal)

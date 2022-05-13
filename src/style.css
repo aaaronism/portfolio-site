@@ -261,7 +261,7 @@ section:nth-child(odd)
     height: 50px;
     background-color: rgba(0, 0, 0, 0);
     border:rgba(0, 0, 0, 0);
-    animation: afadeIn 5s forwards
+    animation: afadeIn 11s forwards
     /* transition: 0s filter */
 }
 
@@ -278,7 +278,7 @@ section:nth-child(odd)
     height: 50px;
     background-color: rgba(0, 0, 0, 0);
     border:rgba(0, 0, 0, 0);
-    animation: afadeIn 5s forwards
+    animation: afadeIn 11s forwards
     /* transition: 0s filter */
 }
 
@@ -314,7 +314,7 @@ section:nth-child(odd)
     bottom: 94px;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: afadeIn 7s forwards;
+    animation: afadeIn 12s forwards;
 }
 
 #scrolltext {
